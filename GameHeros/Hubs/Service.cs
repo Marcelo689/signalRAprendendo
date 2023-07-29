@@ -12,7 +12,7 @@
         }
     }
 
-    internal class IpClass
+    public class IpClass
     {
         public string ip { get; set; }  
     }

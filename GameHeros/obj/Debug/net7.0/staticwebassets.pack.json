@@ -13,6 +13,30 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\marce\\Desktop\\C#\\SignalR\\GameHeros\\wwwroot\\imgs\\naruto\\gigantrasegan.webp",
+      "PackagePath": "staticwebassets\\imgs\\naruto\\gigantrasegan.webp"
+    },
+    {
+      "Id": "C:\\Users\\marce\\Desktop\\C#\\SignalR\\GameHeros\\wwwroot\\imgs\\naruto\\hero1.webp",
+      "PackagePath": "staticwebassets\\imgs\\naruto\\hero1.webp"
+    },
+    {
+      "Id": "C:\\Users\\marce\\Desktop\\C#\\SignalR\\GameHeros\\wwwroot\\imgs\\naruto\\kyuubiboost.webp",
+      "PackagePath": "staticwebassets\\imgs\\naruto\\kyuubiboost.webp"
+    },
+    {
+      "Id": "C:\\Users\\marce\\Desktop\\C#\\SignalR\\GameHeros\\wwwroot\\imgs\\naruto\\shadownclone.png",
+      "PackagePath": "staticwebassets\\imgs\\naruto\\shadownclone.png"
+    },
+    {
+      "Id": "C:\\Users\\marce\\Desktop\\C#\\SignalR\\GameHeros\\wwwroot\\imgs\\sasuke\\Susanoo.jpg",
+      "PackagePath": "staticwebassets\\imgs\\sasuke\\Susanoo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\marce\\Desktop\\C#\\SignalR\\GameHeros\\wwwroot\\imgs\\sasuke\\hero2.jpg",
+      "PackagePath": "staticwebassets\\imgs\\sasuke\\hero2.jpg"
+    },
+    {
       "Id": "C:\\Users\\marce\\Desktop\\C#\\SignalR\\GameHeros\\wwwroot\\js\\chat.js",
       "PackagePath": "staticwebassets\\js\\chat.js"
     },

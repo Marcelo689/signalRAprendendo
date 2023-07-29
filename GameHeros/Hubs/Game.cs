@@ -3,20 +3,43 @@ using System.Text.Json.Serialization;
 
 namespace GameHeros.Hubs
 {
-    internal class Game
+    public class Game
     {
-        private static Player Player { get; set; }
-        public static Player ChoosePlayer(int idNextToPlay, List<Player> inGamePlayers)
+        public int CurrentSkillId { get; set; }
+        public Player CurrentPlayer { get; set; }
+        public Player Player1 { get; set; }
+        public Player Player2 { get; set; }
+        public List<Player> PlayerList { get; set; }
+        public Player ChoosePlayer(int idNextToPlay, List<Player> inGamePlayers)
         {
-            Player = inGamePlayers.FirstOrDefault( e => e.PlayerId == idNextToPlay);
+            PlayerList = inGamePlayers;
+            CurrentPlayer = inGamePlayers.FirstOrDefault( e => e.PlayerId == idNextToPlay);
 
-            return Player;
+            return CurrentPlayer;
         }
 
-        public static async void Turn(ChatHub chathub)
+        public void ChangePlayer(){
+            
+            if(CurrentPlayer != Player1) {
+                CurrentPlayer = Player2;
+            }else 
+            if(CurrentPlayer != Player2) {
+                CurrentPlayer = Player1;
+            }
+        }
+        public async Task Turn(ChatHub chathub)
         {
-            string jsonContent = JsonSerializer.Serialize<List<Player>>(chathub.Players);
+            var game = new Game { 
+                CurrentSkillId = 0,
+                CurrentPlayer = ChoosePlayer(1, GameObject.Players),
+                Player1       = GameObject.Player1,
+                Player2       = GameObject.Player2,
+                PlayerList    = GameObject.Players,
+            };
 
+            string jsonContent = JsonSerializer.Serialize<Game>(game);
+
+            ChangePlayer();
             await chathub.PlayerTurnStart(jsonContent);
         }
     }

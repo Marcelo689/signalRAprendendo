@@ -1,16 +1,54 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<style>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    .game{
+        display:flex;
+        justify-content:space-between;
+    }
 
-<button onclick="hello('lucy frasag 404 nothing more')"> button click me!</button>
+    .img-hero{
+        width:200px;
+        height:200px;
+        margin:20px;
+    }
+
+    .div-skills{
+        display:flex;
+    }
+
+    .div-skill{
+        border: 2px solid gray;
+        padding:20px;
+    }
+
+    .div-skill img{
+        width:80px;
+        height:80px;
+        margin:10px;
+    }
+
+    .div-hidden{
+        display:none;
+    }
+
+    .div-show{
+        display:block;
+    }
+</style>
+
+<button onclick="hello()"> button click me!</button>
 
 <ul id="messagesList"></ul>
 
+<div class="container game">
+
+    <div id="player1">
+    </div>
+    <div id="player2">
+    </div>
+</div>
 
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>

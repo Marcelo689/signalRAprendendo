@@ -4,16 +4,28 @@ using System.Linq;
 
 namespace GameHeros.Hubs
 {
-    public class ChatHub : Hub
+
+    public static class GameObject
     {
-        public Random random = new Random();
-        public List<Hero> Heros = new List<Hero>()
+
+        public static List<Hero> Heros = new List<Hero>()
         {
-            new Charlie(),
-            new X_Treme(),
+            new Naruto(),
+            new Sasuke(),
         };
 
-        public List<Player> Players = new List<Player>();
+        public static List<Player> Players = new List<Player>();
+        public static int CurrentSkillId { get; set; } 
+        public static Player CurrentPlayer { get; set; }
+        public static Player Player1 { get; set; }
+        public static Player Player2 { get; set; }
+        public static List<Player> PlayerList { get; set; }
+    }
+    public class ChatHub : Hub
+    {
+        public Game Game { get; set; } = new Game();
+
+        public Random random = new Random();
         
         private readonly IHttpContextAccessor _httpContextAccessor;
         public ChatHub(IHttpContextAccessor httpContextAccessor)
@@ -24,63 +36,42 @@ namespace GameHeros.Hubs
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
+        public async Task MakeTurn(Game gameObject)
+        {
+            var idSkillUsed = gameObject.CurrentSkillId;
+            gameObject.CurrentPlayer.Hero.HeroSkills.First(e => e.Id == idSkillUsed);
+        }
 
-        public async Task ConnectPlayer(string myMessage)
+        public async Task ConnectPlayer()
         {
             var ipDotNet = await Service.GetIp();
 
-            if(IpIsNew(ipDotNet))
-            {
-                Player player = AddRandomHeroToUser(ipDotNet);
-                Players.Add(player);
-                await Clients.Caller.SendAsync("RenderPlayerPage", player);
-            }
+            AddPlayersStatic(ipDotNet);
 
-            if(Players.Count == 2) {
-                GameStart();
-            }
-
-            await Clients.All.SendAsync("ReceiveMessage", myMessage, ipDotNet);
+            await Game.Turn(this);
         }
 
         public async Task PlayerTurnStart(string jsonPageContent)
         {
-            await Clients.All.SendAsync("PlayerStart", jsonPageContent);
+            await Clients.All.SendAsync("PlayerTurnStart", jsonPageContent);
         }
 
-        private void GameStart()
+        private void AddPlayersStatic(string ipDotNet)
         {
-            Random orderRandomizer = new Random();
-            int idP1  = orderRandomizer.Next(Players.Count);
-            int idP2  = orderRandomizer.Next();
+            var user   = new Player(ipDotNet);
+            var user2  = new Player(ipDotNet.Substring(0,ipDotNet.Length-2) + "9");
 
-            Player firstPlayer  = Players.First(e => e.Hero?.Id == idP1);
-            Player secondPlayer = Players.First(e => e.Hero?.Id == idP2);
+            user.Hero  = GameObject.Heros[0];
+            user2.Hero = GameObject.Heros[1];
 
-            var inGamePlayers = new List<Player> {firstPlayer, secondPlayer};
-            var idNextToPlay = firstPlayer.PlayerId;
-            while(!firstPlayer.Hero.Alive || !secondPlayer.Hero.Alive)
-            {
-                Game.ChoosePlayer(idNextToPlay, inGamePlayers);
-                Game.Turn(this);
-                
-            }
-        }
-
-        private Player AddRandomHeroToUser(string ipDotNet)
-        {
-            var user = new Player(ipDotNet);
-            var heroId = random.Next(Heros.Count);
-
-            Hero heroRandonlySelected = Heros.FirstOrDefault( e => e.Id == heroId);
-
-            user.Hero = heroRandonlySelected;
-            return user;
+            GameObject.Players.Clear();
+            GameObject.Players.Add(user);
+            GameObject.Players.Add(user2);
         }
 
         public bool IpIsNew(string ip)
         {
-            Player? player = Players.FirstOrDefault(e => e.PlayerIp == ip);
+            Player? player = GameObject.Players.FirstOrDefault(e => e.PlayerIp == ip);
             return player == null;
         }
 

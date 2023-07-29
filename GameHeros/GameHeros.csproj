@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\imgs\naruto\hero1.webp" />
+    <None Include="wwwroot\imgs\sasuke\hero2.jpg" />
+  </ItemGroup>
+
 </Project>

@@ -3,6 +3,7 @@
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
 var gameObject;
+
 connection.on("ReceiveMessage", async function (message, ip) {
 
     var li = document.createElement("li");
@@ -16,20 +17,12 @@ connection.on("PlayerTurnStart", function (jsonPage) {
     RenderPlayer(jsonPage);
 })
 
-
 connection.start().then(function () {
+    
     //document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
     return console.error(err.toString());
 });
-
-function hello() {
-    connection.invoke("ConnectPlayer").catch(function (err) {
-        return console.error(err.toString());
-    });
-    event.preventDefault();
-    return "nada";
-}
 
 function RenderPlayer(dados) {
 
@@ -41,9 +34,21 @@ function RenderPlayer(dados) {
     var divPlayer2 = document.getElementById("player2");
 
     RenderPlayerContainer(divPlayer1, jogadores[0]);
-    RenderPlayerContainer(divPlayer2, jogadores[1]);
+    //RenderPlayerContainer(divPlayer2, jogadores[1]);
 }
 
+function CreateStatusElement(name, information) {
+    var p = document.createElement("p");
+    var bName = document.createElement("b");
+    bName.textContent = name;
+
+    p.appendChild(bName);
+    var valueP = ": " + information;
+
+    p.textContent = bName.textContent + valueP;
+
+    return p;
+}
 function RenderPlayerContainer(container, jogador) {
 
     var img = document.createElement("img");
@@ -53,7 +58,18 @@ function RenderPlayerContainer(container, jogador) {
     var name = document.createElement("h3");
     name.textContent = jogador.Hero.Name;
 
+    var health  = jogador.Hero.HealthPoints;
+    var attack  = jogador.Hero.AttackPoints;
+    var defense = jogador.Hero.Defense;
+
+    var dHealth   = CreateStatusElement("Health", health);
+    var dAttack   = CreateStatusElement("Attack", attack);
+    var dDefense  = CreateStatusElement("Defense", defense);
+
     container.appendChild(name);
+    container.appendChild(dHealth);
+    container.appendChild(dAttack);
+    container.appendChild(dDefense);
     container.appendChild(img);
 
     var divSkills = document.createElement("div");
@@ -136,9 +152,14 @@ function AddSkillReturn(skill) {
 
 function activateSkill(imageSkill) {
     var skillId = imageSkill.target.parentElement.children[1].getElementsByTagName("hidden")[0].value
-
     gameObject.CurrentSkillId = skillId;
     connection.invoke("MakeTurn", gameObject).catch(function (err) {
+        return console.error(err.toString());
+    });
+}
+
+function StartGame() {
+    connection.invoke("ConnectPlayer").catch(function (err) {
         return console.error(err.toString());
     });
 }

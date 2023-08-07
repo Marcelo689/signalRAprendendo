@@ -30,3 +30,5 @@ C:\Users\marce\Desktop\C#\SignalR\GameHeros\obj\Debug\net7.0\refint\GameHeros.dl
 C:\Users\marce\Desktop\C#\SignalR\GameHeros\obj\Debug\net7.0\GameHeros.pdb
 C:\Users\marce\Desktop\C#\SignalR\GameHeros\obj\Debug\net7.0\GameHeros.genruntimeconfig.cache
 C:\Users\marce\Desktop\C#\SignalR\GameHeros\obj\Debug\net7.0\ref\GameHeros.dll
+C:\Users\marce\Desktop\C#\SignalR\GameHeros\obj\Debug\net7.0\GameHeros.csproj.CopyComplete
+C:\Users\marce\Desktop\C#\SignalR\GameHeros\bin\Debug\net7.0\System.Text.Json.dll

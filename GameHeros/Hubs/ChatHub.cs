@@ -1,25 +1,23 @@
 ﻿using GameHeros.Models;
 using Microsoft.AspNetCore.SignalR;
 using System.Linq;
+using System.Text.Json;
 
 namespace GameHeros.Hubs
 {
 
     public static class GameObject
     {
-
         public static List<Hero> Heros = new List<Hero>()
         {
             new Naruto(),
             new Sasuke(),
         };
-
-        public static List<Player> Players = new List<Player>();
         public static int CurrentSkillId { get; set; } 
-        public static Player CurrentPlayer { get; set; }
+        public static int CurrentPlayerId { get; set; }
         public static Player Player1 { get; set; }
         public static Player Player2 { get; set; }
-        public static List<Player> PlayerList { get; set; }
+        public static List<Player> PlayerList { get; set; } = new List<Player>();
     }
     public class ChatHub : Hub
     {
@@ -36,17 +34,15 @@ namespace GameHeros.Hubs
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);
         }
-        public async Task MakeTurn(Game gameObject)
+        public void MakeTurn(dynamic gameTO) 
         {
-            var idSkillUsed = gameObject.CurrentSkillId;
-            gameObject.CurrentPlayer.Hero.HeroSkills.First(e => e.Id == idSkillUsed);
+            var algo = gameTO.ToString().Replace("ValueKind = ", "");
+            var no = JsonSerializer.Deserialize<GameTO>(algo);
         }
-
+        
         public async Task ConnectPlayer()
         {
-            var ipDotNet = await Service.GetIp();
-
-            AddPlayersStatic(ipDotNet);
+            AddPlayersStatic();
 
             await Game.Turn(this);
         }
@@ -56,23 +52,19 @@ namespace GameHeros.Hubs
             await Clients.All.SendAsync("PlayerTurnStart", jsonPageContent);
         }
 
-        private void AddPlayersStatic(string ipDotNet)
+        private void AddPlayersStatic()
         {
-            var user   = new Player(ipDotNet);
-            var user2  = new Player(ipDotNet.Substring(0,ipDotNet.Length-2) + "9");
+            var playerId = Context.ConnectionId;
+            var user   = new Player();
+            user.PlayerIp = playerId;
+            var user2  = new Player();
 
             user.Hero  = GameObject.Heros[0];
             user2.Hero = GameObject.Heros[1];
 
-            GameObject.Players.Clear();
-            GameObject.Players.Add(user);
-            GameObject.Players.Add(user2);
-        }
-
-        public bool IpIsNew(string ip)
-        {
-            Player? player = GameObject.Players.FirstOrDefault(e => e.PlayerIp == ip);
-            return player == null;
+            GameObject.PlayerList.Clear();
+            GameObject.PlayerList.Add(user);
+            GameObject.PlayerList.Add(user2);
         }
 
     }

@@ -1,0 +1,12 @@
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\bin\Debug\net7.0\JsonManipulator.deps.json
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\bin\Debug\net7.0\JsonManipulator.dll
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\bin\Debug\net7.0\JsonManipulator.pdb
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\obj\Debug\net7.0\JsonManipulator.csproj.AssemblyReference.cache
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\obj\Debug\net7.0\JsonManipulator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\obj\Debug\net7.0\JsonManipulator.AssemblyInfoInputs.cache
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\obj\Debug\net7.0\JsonManipulator.AssemblyInfo.cs
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\obj\Debug\net7.0\JsonManipulator.csproj.CoreCompileInputs.cache
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\obj\Debug\net7.0\JsonManipulator.dll
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\obj\Debug\net7.0\refint\JsonManipulator.dll
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\obj\Debug\net7.0\JsonManipulator.pdb
+C:\Users\marce\Desktop\C#\SignalR\JsonManipulator\obj\Debug\net7.0\ref\JsonManipulator.dll

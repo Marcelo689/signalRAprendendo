@@ -1,8 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "HtdEGi6Gc1sFxtTps5OmgOZn+gxoZiPckBxpP2tkDtWKcMkU91WEPqQ95BVTlXYH4dxSJX24hdaQE0E2CaXhtQ==",
+  "dgSpecHash": "8T5O7s0sWRaj/1G8ZBpr9sRvY4V8MU01/2+xI6rDU4OyE9HPrno+iRMHoJLpsyCwJs6+cLW7w5c4h5tkxZXeQg==",
   "success": true,
   "projectFilePath": "C:\\Users\\marce\\Desktop\\C#\\SignalR\\GameHeros\\GameHeros.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\marce\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\marce\\.nuget\\packages\\system.text.json\\7.0.3\\system.text.json.7.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

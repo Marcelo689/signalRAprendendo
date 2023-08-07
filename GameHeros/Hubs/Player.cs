@@ -8,11 +8,10 @@ namespace GameHeros.Hubs
         public int PlayerId { get; set; }
         public string PlayerIp;
         public Hero? Hero { get; set; }
-        public Player(string ipDotNet)
+        public Player()
         {
             IdCounter += 1;
             PlayerId = IdCounter;
-            this.PlayerIp = ipDotNet;
         }
     }
 }
